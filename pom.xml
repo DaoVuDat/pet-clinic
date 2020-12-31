@@ -14,7 +14,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>pet-clinic</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>pet-clinic</name>
     <description>Pet Clinic Project</description>
 
@@ -38,8 +38,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <goals>install</goals>
                 </configuration>
@@ -49,6 +48,6 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:DaoVuDat/pet-clinic.git</developerConnection>
-      <tag>pet-clinic-0.0.1</tag>
+
   </scm>
 </project>
