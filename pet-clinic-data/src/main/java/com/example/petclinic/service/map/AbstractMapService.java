@@ -1,14 +1,13 @@
 package com.example.petclinic.service.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.example.petclinic.model.BaseEntity;
+
+import java.util.*;
 
 // this is like a memory-based state, more like be in Database
-public abstract class AbstractMapService<Type, ID> {
+public abstract class AbstractMapService<Type extends BaseEntity, ID extends Long> {
 
-    protected Map<ID, Type> map = new HashMap<>();
+    protected Map<Long, Type> map = new HashMap<>();
 
     Set<Type> findAll() {
         return new HashSet<>(map.values());
@@ -18,8 +17,15 @@ public abstract class AbstractMapService<Type, ID> {
         return map.get(id);
     }
 
-    Type save(ID id, Type object) {
-        map.put(id, object);
+    Type save(Type object) {
+        if(object != null) {
+            if(object.getId() == null) {
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Object cannot be null");
+        }
         return object;
     }
 
@@ -29,5 +35,17 @@ public abstract class AbstractMapService<Type, ID> {
 
     void delete(Type object) {
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+
+    private Long getNextId(){
+        Long nextId = null;
+
+        try {
+            nextId = Collections.max(map.keySet()) + 1;
+        } catch (NoSuchElementException e) {
+            nextId = 1L;
+        }
+
+        return nextId;
     }
 }
