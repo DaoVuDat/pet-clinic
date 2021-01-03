@@ -15,14 +15,14 @@ import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
-public class OwnerSPJpaService implements OwnerService {
+public class OwnerSDJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
 
     @Autowired
-    public OwnerSPJpaService(
+    public OwnerSDJpaService(
             OwnerRepository ownerRepository,
             PetRepository petRepository,
             PetTypeRepository petTypeRepository) {
